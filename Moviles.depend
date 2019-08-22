@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1536246492 source:c:\users\usuario\desktop\moviles\tda-pila\stack.c
+	"Stack.h"
+	<stdlib.h>
+	<assert.h>
+
+1536246492 c:\users\usuario\desktop\moviles\tda-pila\stack.h
+
