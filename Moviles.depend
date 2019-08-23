@@ -6,3 +6,8 @@
 
 1536246492 c:\users\usuario\desktop\moviles\tda-pila\stack.h
 
+1566518897 source:c:\users\usuario\desktop\moviles\main.c
+	<stdio.h>
+	<stdlib.h>
+	"TDA-Pila/Stack.h"
+

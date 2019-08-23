@@ -1,7 +1,7 @@
 /**
- * Autor : Dan Santos
- * GitHub : github.com/DanSantosAA
- * Proposito : Dado un movil, el programa comprueba si este esta en equilibrio, para mas info vea README.MD
+ * Autor       : Dan Santos
+ * GitHub User : github.com/DanSantosAA
+ * Proposito   : Dado un movil, el programa comprueba si este esta en equilibrio, para mas info vea README.MD
  */
 
 #include <stdio.h>
@@ -10,44 +10,61 @@
 #include "TDA-Pila/Stack.h"
 
 /** ----------- Tipos de Datos ----------- */
-typedef struct {
+typedef struct Movil{
     int peso_izq;                                   //peso de la izquierda de un sub-movil, 0 si hay un sub-movil
     int peso_der;                                   //peso de la derecha de un sub-movil, 0 si hay un sub-movil
     int dist_izq;                                   //distancia del punto de anclaje del nodo, al peso izquierdo
     int dist_der;                                   //distancia del punto de anclaje del nodo, al peso derechp
 
-    struct Node *left;                              //puntero al sub-movil izquierdo, NULL si no tiene
-    struct Node *right;                             //puntero al sub-movil derecho, NULL si no tiene
+    struct Movil *left;                              //puntero al sub-movil izquierdo, NULL si no tiene
+    struct Movil *right;                             //puntero al sub-movil derecho, NULL si no tiene
 
-}Node;
+}Movil;
 
 /** --------- Prototipos --------- */
-void leerInfo(Node *nodo_actual);
-Node *crearNodo(void);
-int pesoTotal(Node *nodo_act);
+void leerInfo(Movil *nodo_actual);
+Movil *crearNodo(void);
+int pesoTotal(Movil *nodo_act);
 
 int main()
 {
+    Movil *nodo_inicial = crearNodo();
 
-
+    leerInfo(nodo_inicial);
 
     return 0;
 }
 
 /** Procedimiento recursivo, que va leyendo la informacion de los nodos del movil. */
-void leerInfo(Node *nodo_actual)
+void leerInfo(Movil *nodo_actual)
 {
+    scanf("%i %i %i %i", &(nodo_actual->peso_izq), &(nodo_actual->dist_izq), &(nodo_actual->peso_der), &(nodo_actual->dist_der));
 
+    if(nodo_actual->peso_izq == 0)
+    {
+        nodo_actual->left = crearNodo();
+        leerInfo(nodo_actual->left);
+        nodo_actual->peso_izq = pesoTotal(nodo_actual->left);
+    }
+
+    if(nodo_actual->peso_der == 0)
+    {
+        nodo_actual->right = crearNodo();
+        leerInfo(nodo_actual->right);
+        nodo_actual->peso_der = pesoTotal(nodo_actual->right);
+    }
 }
 
 /** Funcion que retorna un nuevo nodo creado. */
-Node *crearNodo(void)
+Movil *crearNodo(void)
 {
-   return NULL;
+   Movil *nuevo_nodo = (Movil *) calloc(1, sizeof(Movil));
+
+   return nuevo_nodo;
 }
 
 /** Funcion que retorna la suma de los pesos izq. y der. del nodo ingresado. */
-int pesoTotal(Node *nodo_act)
+int pesoTotal(Movil *nodo_act)
 {
-    return 0;
+    return nodo_act->peso_izq + nodo_act->peso_der;
 }
